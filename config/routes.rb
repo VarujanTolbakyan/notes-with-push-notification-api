@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-    resources :users
+    resources :users do
+      resources :notes
+    end
   end
 end
