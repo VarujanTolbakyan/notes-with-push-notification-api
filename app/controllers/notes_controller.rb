@@ -1,5 +1,4 @@
 class NotesController < BaseController
-  before_action :user_authorization
   before_action :set_note, only: [:show, :update, :destroy]
 
   # GET users/1/notes
@@ -16,7 +15,7 @@ class NotesController < BaseController
 
   # POST users/1/notes
   def create
-    @note = Note.new(note_params)
+    @note = current_user.notes.build(note_params)
 
     if @note.save
       render json: { note: @note , message: 'Note successful updated'}, status: :created
