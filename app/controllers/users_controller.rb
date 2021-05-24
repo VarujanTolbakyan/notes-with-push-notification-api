@@ -45,10 +45,19 @@ class UsersController < BaseController
     render json: { message: 'User successful deleted' }
   end
 
+  def add_device_info
+    current_user.add_device_info(device_info_params)
+    render json: { message: 'Added device info' }
+  end
+
   private
 
   # Only allow a trusted parameter "white list" through.
   def user_params
     params.require(:user).permit(:email, :password, :name)
+  end
+
+  def device_info_params
+    { device_type: find_device_type, device_token: params[:device_token] }
   end
 end

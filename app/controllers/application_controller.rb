@@ -39,4 +39,16 @@ class ApplicationController < ActionController::API
   rescue
     nil
   end
+
+  # Determines the device type from the request headers
+  def find_device_type
+    case request.user_agent
+    # when /mac|ios/i
+    #   :ios
+    when /android/i
+      :android
+    else
+      nil
+    end
+  end
 end
